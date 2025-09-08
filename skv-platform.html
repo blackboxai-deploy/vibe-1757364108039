@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKV Global Business Service LLC - Voice AI Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .pulse-red { animation: pulse-red 1s infinite; }
+        @keyframes pulse-red {
+            0%, 100% { background-color: #dc2626; }
+            50% { background-color: #b91c1c; }
+        }
+        .bounce-dots > div {
+            animation: bounce 1.4s infinite both;
+        }
+        .bounce-dots > div:nth-child(2) { animation-delay: 0.1s; }
+        .bounce-dots > div:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-2xl">S</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">SKV Global Business Service LLC</h1>
+                        <p class="text-lg text-gray-600 font-medium">🌍 Hungary | London | Dubai | Worldwide</p>
+                    </div>
+                </div>
+                <div class="flex space-x-3">
+                    <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">🎤 Voice Enabled</span>
+                    <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-semibold">📄 Document Upload</span>
+                    <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-semibold">🤖 AI Support</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white border-b-2">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex space-x-10">
+                <button onclick="showTab('chat')" id="chat-tab" 
+                        class="py-4 border-b-4 border-blue-500 text-blue-600 font-bold text-lg">
+                    💬 AI Assistant
+                </button>
+                <button onclick="showTab('services')" id="services-tab" 
+                        class="py-4 border-b-4 border-transparent text-gray-500 font-bold text-lg hover:text-gray-700">
+                    🏢 Our Services
+                </button>
+                <button onclick="showTab('upload')" id="upload-tab" 
+                        class="py-4 border-b-4 border-transparent text-gray-500 font-bold text-lg hover:text-gray-700">
+                    📄 Document Center
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+        
+        <!-- AI Assistant Tab -->
+        <div id="chat-content" class="tab-content active">
+            <div class="space-y-8">
+                <!-- Features Banner -->
+                <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-300 rounded-2xl p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">🎤 Voice Messages + 🤖 AI Assistant</h2>
+                    <p class="text-lg text-gray-600 mb-4">Record voice messages, get AI responses, and connect with our global expert team!</p>
+                    <div class="flex space-x-4">
+                        <span class="bg-green-200 text-green-800 px-4 py-2 rounded-full font-semibold">🎤 Voice Recording</span>
+                        <span class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full font-semibold">🔈 Audio Playback</span>
+                        <span class="bg-purple-200 text-purple-800 px-4 py-2 rounded-full font-semibold">🌍 Global Experts</span>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <!-- Chat Messages Area -->
+                    <div id="chat-messages" class="h-96 overflow-y-auto bg-gray-50 rounded-xl p-6 mb-8 space-y-4">
+                        <div class="flex justify-start">
+                            <div class="bg-white border-2 border-gray-200 text-gray-900 px-6 py-4 rounded-2xl max-w-lg shadow-md">
+                                <div class="flex items-center space-x-3 mb-3">
+                                    <span class="text-2xl">🤖</span>
+                                    <span class="font-bold text-lg text-blue-600">SKV AI Assistant</span>
+                                    <button onclick="speakText('Hello! I can help with visa, tax, legal services across Hungary, London, and Dubai offices. Use voice or type your questions!')" 
+                                            class="bg-blue-100 hover:bg-blue-200 p-2 rounded-full transition-colors" title="🔈 Listen to response">
+                                        <span class="text-lg">🔈</span>
+                                    </button>
+                                </div>
+                                <p class="text-lg leading-relaxed">Hello! I can help with visa, tax, legal services across our <strong>Hungary, London, and Dubai</strong> offices. Use voice messages or type your questions!</p>
+                                <div class="text-sm text-gray-500 mt-3">${new Date().toLocaleTimeString()}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action Buttons -->
+                    <div class="mb-8">
+                        <p class="text-lg font-bold text-gray-700 mb-4">🚀 Quick Questions:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <button onclick="askQuestion('I need tourist visa for Europe trip')" 
+                                    class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-6 py-4 rounded-xl border-2 border-blue-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">🛂 Tourist Visa</div>
+                                <div class="text-sm">Documents for Europe trip?</div>
+                            </button>
+                            <button onclick="askQuestion('UK company setup cost and process?')" 
+                                    class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-6 py-4 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">🇬🇧 UK Company</div>
+                                <div class="text-sm">Setup cost and process?</div>
+                            </button>
+                            <button onclick="askQuestion('Dubai business license requirements?')" 
+                                    class="bg-green-50 hover:bg-green-100 text-green-700 px-6 py-4 rounded-xl border-2 border-green-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">🇦🇪 Dubai Business</div>
+                                <div class="text-sm">License requirements?</div>
+                            </button>
+                            <button onclick="askQuestion('Tax filing assistance needed for international business')" 
+                                    class="bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-6 py-4 rounded-xl border-2 border-yellow-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">💰 Tax Services</div>
+                                <div class="text-sm">Filing assistance needed?</div>
+                            </button>
+                            <button onclick="askQuestion('Legal consultation for partnership agreement')" 
+                                    class="bg-red-50 hover:bg-red-100 text-red-700 px-6 py-4 rounded-xl border-2 border-red-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">⚖️ Legal Services</div>
+                                <div class="text-sm">Consultation needed?</div>
+                            </button>
+                            <button onclick="askQuestion('How to upload my documents securely?')" 
+                                    class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-6 py-4 rounded-xl border-2 border-indigo-200 transition-all transform hover:scale-105 text-left">
+                                <div class="font-bold mb-1">📄 Documents</div>
+                                <div class="text-sm">How to upload securely?</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Voice Recording Status -->
+                    <div id="recording-status" class="mb-8 bg-red-100 border-2 border-red-300 rounded-xl p-6 hidden">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="bounce-dots flex space-x-2">
+                                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                                </div>
+                                <span class="text-red-700 font-bold text-lg">🎤 Recording voice message... (max 10 seconds)</span>
+                            </div>
+                            <button onclick="stopRecording()" 
+                                    class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-colors">
+                                🛑 Stop Recording
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Message Input Area -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="flex space-x-4">
+                            <!-- Voice Button -->
+                            <button id="voice-btn" onclick="startRecording()" 
+                                    class="p-4 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-110" 
+                                    title="🎤 Click to record voice message (max 10 seconds)">
+                                <span class="text-2xl">🎤</span>
+                            </button>
+                            
+                            <!-- Text Input -->
+                            <input type="text" id="message-input" 
+                                   placeholder="Type your message or use voice recording for visa, tax, legal services..."
+                                   class="flex-1 px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-blue-500 text-lg"
+                                   onkeydown="if(event.key==='Enter') sendMessage()">
+                            
+                            <!-- Send Button -->
+                            <button onclick="sendMessage()" 
+                                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
+                                Send 📤
+                            </button>
+                        </div>
+
+                        <!-- Features Info -->}
+                        <div class="mt-6 flex justify-between items-center text-sm text-gray-600">
+                            <div class="flex space-x-6">
+                                <span class="flex items-center space-x-2">
+                                    <span class="text-lg">🎤</span>
+                                    <span>Voice: Click microphone to record</span>
+                                </span>
+                                <span class="flex items-center space-x-2">
+                                    <span class="text-lg">🔈</span>
+                                    <span>Audio: Click speakers to listen</span>
+                                </span>
+                                <span class="flex items-center space-x-2">
+                                    <span class="text-lg">📄</span>
+                                    <span>Upload: Use Document Center</span>
+                                </span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="font-semibold">AI Online</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Tab -->
+        <div id="services-content" class="tab-content">
+            <div class="space-y-10">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">🌍 Global Expert Team & Services</h2>
+                    <p class="text-2xl text-gray-600 mb-8">Professional business solutions across three continents</p>
+                    <div class="flex justify-center space-x-6">
+                        <span class="bg-blue-100 text-blue-700 px-6 py-3 rounded-xl font-bold text-lg">🇭🇺 Hungary Office</span>
+                        <span class="bg-red-100 text-red-700 px-6 py-3 rounded-xl font-bold text-lg">🇬🇧 London Office</span>
+                        <span class="bg-green-100 text-green-700 px-6 py-3 rounded-xl font-bold text-lg">🇦🇪 Dubai Office</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Visa Services -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-100">
+                        <div class="text-center">
+                            <div class="text-8xl mb-6">🛂</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Visa & License Services</h3>
+                            <p class="text-lg text-gray-600 mb-2">Expert: **Rahul**</p>
+                            <p class="text-blue-600 font-bold mb-4">📧 rahul@skvbusiness.com</p>
+                            <span class="bg-blue-100 text-blue-700 px-6 py-3 rounded-full font-bold text-lg">Starting from $199</span>
+                            
+                            <div class="mt-8 mb-8">
+                                <h4 class="font-bold text-lg mb-4">Global Processing Network:</h4>
+                                <div class="grid grid-cols-3 gap-3 text-sm">
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇭🇺 Hungary</div>
+                                        <div class="text-xs">EU Visas</div>
+                                    </div>
+                                    <div class="bg-red-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇬🇧 London</div>
+                                        <div class="text-xs">UK Visas</div>
+                                    </div>
+                                    <div class="bg-green-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇦🇪 Dubai</div>
+                                        <div class="text-xs">Asia/ME Visas</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-left space-y-3 mb-8">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Tourist & Business Visas (150+ countries)</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Student Visas & Work Permits</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Business License Applications</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">95% Success Rate | Express Processing</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="contactExpert('rahul@skvbusiness.com', 'Visa Services Inquiry', 'Hello Rahul, I need visa services assistance. Please contact me to discuss requirements.')" 
+                                    class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl text-xl font-bold hover:shadow-xl transition-all transform hover:scale-105">
+                                📧 Contact Rahul (Visa Expert)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tax Services -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-green-100">
+                        <div class="text-center">
+                            <div class="text-8xl mb-6">💰</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Tax Services</h3>
+                            <p class="text-lg text-gray-600 mb-2">Expert: **Mohit**</p>
+                            <p class="text-green-600 font-bold mb-4">📧 mohit@skvbusiness.com</p>
+                            <span class="bg-green-100 text-green-700 px-6 py-3 rounded-full font-bold text-lg">Starting from $99</span>
+                            
+                            <div class="mt-8 mb-8">
+                                <h4 class="font-bold text-lg mb-4">Tax Expertise Coverage:</h4>
+                                <div class="grid grid-cols-3 gap-3 text-sm">
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇭🇺 Hungary</div>
+                                        <div class="text-xs">EU Tax Laws</div>
+                                    </div>
+                                    <div class="bg-red-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇬🇧 London</div>
+                                        <div class="text-xs">UK Tax System</div>
+                                    </div>
+                                    <div class="bg-green-50 p-3 rounded-lg">
+                                        <div class="font-bold">🇦🇪 Dubai</div>
+                                        <div class="text-xs">UAE Tax Laws</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-left space-y-3 mb-8">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Tax Filing & GST Registration</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">International Tax Compliance</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Financial Planning & Advisory</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Cross-border Tax Optimization</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="contactExpert('mohit@skvbusiness.com', 'Tax Services Inquiry', 'Hello Mohit, I need tax services assistance. Please contact me to discuss requirements.')" 
+                                    class="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-4 px-6 rounded-xl text-xl font-bold hover:shadow-xl transition-all transform hover:scale-105">
+                                📧 Contact Mohit (Tax Expert)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- European Services -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-purple-100">
+                        <div class="text-center">
+                            <div class="text-8xl mb-6">🇬🇧</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">European & London Setup</h3>
+                            <p class="text-lg text-gray-600 mb-2">Expert: **Nikita**</p>
+                            <p class="text-purple-600 font-bold mb-4">📧 nikita@skvbusiness.com</p>
+                            <span class="bg-purple-100 text-purple-700 px-6 py-3 rounded-full font-bold text-lg">Starting from £299</span>
+                            
+                            <div class="text-left space-y-3 mt-8 mb-8">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">UK Company Formation & Banking</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">EU Business Registration</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">London Office Establishment</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">European Compliance from Hungary</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="contactExpert('nikita@skvbusiness.com', 'European Business Setup', 'Hello Nikita, I need European and London setup assistance. Please contact me.')" 
+                                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6 rounded-xl text-xl font-bold hover:shadow-xl transition-all transform hover:scale-105">
+                                📧 Contact Nikita (Europe Expert)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Legal Services -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-red-100">
+                        <div class="text-center">
+                            <div class="text-8xl mb-6">⚖️</div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Legal & Advisory</h3>
+                            <p class="text-lg text-gray-600 mb-2">Expert: **Sunil (CEO)**</p>
+                            <p class="text-red-600 font-bold mb-4">📧 sunil@skvbusiness.com</p>
+                            <span class="bg-red-100 text-red-700 px-6 py-3 rounded-full font-bold text-lg">Starting from $149</span>
+                            
+                            <div class="text-left space-y-3 mt-8 mb-8">
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Legal Consultation & Strategy</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Contract Review & Drafting</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Business Advisory & Planning</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-green-500 text-2xl">•</span>
+                                    <span class="text-lg">Global Legal Coverage</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="contactExpert('sunil@skvbusiness.com', 'Legal Consultation', 'Hello Sunil, I need legal and advisory services. Please contact me.')" 
+                                    class="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 px-6 rounded-xl text-xl font-bold hover:shadow-xl transition-all transform hover:scale-105">
+                                📧 Contact Sunil (CEO & Legal Expert)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Upload Tab -->
+        <div id="upload-content" class="tab-content">
+            <div class="space-y-10">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">📄 Global Document Management Center</h2>
+                    <p class="text-2xl text-gray-600 mb-8">Upload and access documents from Hungary, London, Dubai, or anywhere worldwide</p>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="bg-white rounded-2xl shadow-xl p-10">
+                    <div class="border-4 border-dashed border-gray-300 rounded-2xl p-16 text-center hover:border-purple-400 transition-colors bg-gradient-to-br from-purple-50 to-blue-50">
+                        <div class="text-9xl mb-8">📁</div>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">Secure Document Upload</h3>
+                        <p class="text-xl text-gray-600 mb-8">Upload to global cloud storage accessible from all offices</p>
+                        
+                        <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.docx,.doc" 
+                               onchange="handleUpload(this)" class="hidden" id="file-input">
+                        
+                        <button onclick="document.getElementById('file-input').click()" 
+                                class="bg-purple-600 hover:bg-purple-700 text-white px-12 py-6 rounded-2xl text-2xl font-bold transition-all shadow-xl hover:shadow-2xl transform hover:scale-110">
+                            📄 Choose Documents to Upload
+                        </button>
+                        
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-lg text-gray-600">
+                            <div>
+                                <p class="font-bold mb-2">📋 Supported Formats:</p>
+                                <p>PDF, JPG, PNG, DOCX, DOC</p>
+                            </div>
+                            <div>
+                                <p class="font-bold mb-2">📊 Specifications:</p>
+                                <p>Max 50MB per file | Unlimited uploads</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Progress -->
+                    <div id="upload-progress" class="mt-8 bg-purple-50 border-2 border-purple-200 rounded-2xl p-8 hidden">
+                        <div class="flex items-center space-x-6">
+                            <span class="text-purple-700 font-bold text-xl">📤 Uploading to SKV Global Cloud...</span>
+                            <div class="flex-1 bg-purple-200 rounded-full h-6">
+                                <div id="progress-bar" class="bg-purple-600 h-6 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                            </div>
+                            <span id="progress-text" class="text-purple-700 font-bold text-xl">0%</span>
+                        </div>
+                        <p class="text-lg text-purple-600 mt-4">Synchronizing across Hungary, London, and Dubai servers...</p>
+                    </div>
+                </div>
+
+                <!-- Global Office Access -->
+                <div class="bg-gradient-to-r from-blue-50 via-purple-50 to-green-50 rounded-2xl p-10">
+                    <h3 class="text-2xl font-bold text-center mb-8">🌍 Global Document Access Network</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl text-center border-2 shadow-lg">
+                            <div class="text-6xl mb-4">🇭🇺</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Hungary Office</h4>
+                            <p class="text-lg text-gray-600 mb-4">European Operations Hub</p>
+                            <div class="space-y-2 text-gray-500">
+                                <p>✅ Document upload & download</p>
+                                <p>✅ EU visa processing center</p>
+                                <p>✅ European compliance base</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-xl text-center border-2 shadow-lg">
+                            <div class="text-6xl mb-4">🇬🇧</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">London Office</h4>
+                            <p class="text-lg text-gray-600 mb-4">UK & Commonwealth Hub</p>
+                            <div class="space-y-2 text-gray-500">
+                                <p>✅ Document upload & download</p>
+                                <p>✅ UK business setup center</p>
+                                <p>✅ Commonwealth services</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-xl text-center border-2 shadow-lg">
+                            <div class="text-6xl mb-4">🇦🇪</div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Dubai Office</h4>
+                            <p class="text-lg text-gray-600 mb-4">Middle East & Asia Hub</p>
+                            <div class="space-y-2 text-gray-500">
+                                <p>✅ Document upload & download</p>
+                                <p>✅ UAE business setup center</p>
+                                <p>✅ Middle East expansion base</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-20 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">SKV Global Business Service LLC</h3>
+                    <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                        Voice-enabled AI business platform with global document management across three continents.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-gray-800 px-4 py-2 rounded-xl font-bold">🇭🇺 Hungary Office</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-xl font-bold">🇬🇧 London Office</span>
+                        <span class="bg-gray-800 px-4 py-2 rounded-xl font-bold">🇦🇪 Dubai Office</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Expert Team Contacts</h4>
+                    <div class="space-y-4 text-lg text-gray-300">
+                        <p class="flex items-center space-x-3">
+                            <span>📧</span>
+                            <span>General: info@skvbusiness.com</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>🛂</span>
+                            <span>Visa: rahul@skvbusiness.com</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>💰</span>
+                            <span>Tax: mohit@skvbusiness.com</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>🇬🇧</span>
+                            <span>European: nikita@skvbusiness.com</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>⚖️</span>
+                            <span>Legal: sunil@skvbusiness.com</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Platform Features</h4>
+                    <div class="space-y-4 text-lg text-gray-300">
+                        <p class="flex items-center space-x-3">
+                            <span>🎤</span>
+                            <span>Voice messaging & recording</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>🔈</span>
+                            <span>Audio response playback</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>📄</span>
+                            <span>Global document upload</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>☁️</span>
+                            <span>Secure cloud storage</span>
+                        </p>
+                        <p class="flex items-center space-x-3">
+                            <span>🌍</span>
+                            <span>Multi-office access</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400 text-lg">
+                    © 2024 SKV Global Business Service LLC. All rights reserved. | 
+                    Voice-Enabled AI Platform | 🇭🇺 Hungary • 🇬🇧 London • 🇦🇪 Dubai
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Functions -->
+    <script>
+        let isRecording = false;
+        let chatMessages = [];
+
+        // Tab Management
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active styling from all tab buttons
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.className = btn.className.replace('border-blue-500 text-blue-600', 'border-transparent text-gray-500');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-content').classList.add('active');
+            
+            // Style active tab button
+            const activeTab = document.getElementById(tabName + '-tab');
+            activeTab.className = activeTab.className.replace('border-transparent text-gray-500', 'border-blue-500 text-blue-600');
+        }
+
+        // Voice Recording Functions
+        function startRecording() {
+            if (isRecording) return;
+            
+            isRecording = true;
+            
+            // Update button appearance
+            const voiceBtn = document.getElementById('voice-btn');
+            voiceBtn.innerHTML = '<span class="text-2xl">🛑</span>';
+            voiceBtn.className = 'p-4 bg-red-600 text-white rounded-xl animate-pulse shadow-lg';
+            
+            // Show recording status
+            document.getElementById('recording-status').classList.remove('hidden');
+            
+            // Simulate recording (3-10 seconds)
+            setTimeout(() => {
+                stopRecording();
+            }, 5000);
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            
+            // Reset button
+            const voiceBtn = document.getElementById('voice-btn');
+            voiceBtn.innerHTML = '<span class="text-2xl">🎤</span>';
+            voiceBtn.className = 'p-4 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:scale-110';
+            
+            // Hide recording status
+            document.getElementById('recording-status').classList.add('hidden');
+            
+            // Simulate voice-to-text conversion
+            setTimeout(() => {
+                const voiceMessages = [
+                    "I need help with tourist visa for my family trip to Europe",
+                    "What are the requirements for UK company registration?",
+                    "I want to set up a business in Dubai, please provide information",
+                    "Need tax filing assistance for my international business",
+                    "Legal consultation required for partnership agreement",
+                    "How much does business visa cost for London office setup?"
+                ];
+                
+                const randomMessage = voiceMessages[Math.floor(Math.random() * voiceMessages.length)];
+                document.getElementById('message-input').value = randomMessage;
+                
+                // Auto-send the voice message
+                setTimeout(() => {
+                    sendMessage(true);
+                }, 1000);
+            }, 2000);
+        }
+
+        // Send Message Function
+        function sendMessage(isVoiceMessage = false) {
+            const input = document.getElementById('message-input');
+            const messageText = input.value.trim();
+            if (!messageText) return;
+            
+            // Add user message to chat
+            addMessageToChat('user', messageText, isVoiceMessage);
+            
+            // Generate AI response
+            let aiResponse = '';
+            const lowerInput = messageText.toLowerCase();
+            
+            if (lowerInput.includes('visa') || lowerInput.includes('passport')) {
+                aiResponse = `🛂 **VISA SERVICES**
+
+Contact Expert: **Rahul**
+📧 rahul@skvbusiness.com
+🌐 visa.skvbusiness.com
+
+**Global Visa Processing:**
+• Tourist Visa: $299-599 (7-15 days processing)
+• Business Visa: $399-899 (10-21 days processing)
+• Student Visa: $199-499 (15-30 days processing)
+
+**Required Documents:**
+• Valid passport (6+ months validity)
+• Recent photographs
+• Bank statements (3-6 months)
+• Travel itinerary
+
+**Global Office Network:**
+🇭🇺 Hungary Office - EU visa processing
+🇬🇧 London Office - UK & Commonwealth visas
+🇦🇪 Dubai Office - Middle East & Asian visas
+
+**Rahul's Expertise:**
+• 150+ countries visa processing
+• 95% approval success rate
+• Express processing available
+
+**Contact Rahul directly: rahul@skvbusiness.com**`;
+            } else if (lowerInput.includes('tax') || lowerInput.includes('gst')) {
+                aiResponse = `💰 **TAX SERVICES**
+
+Contact Expert: **Mohit**
+📧 mohit@skvbusiness.com
+🌐 tax.skvbusiness.com
+
+**Complete Tax Solutions:**
+• Tax Registration & Filing: $149-499
+• GST Registration & Compliance: $199-599
+• International Tax Planning: $299-899
+• Corporate Tax Strategy: $399-1299
+
+**Global Tax Expertise:**
+🇭🇺 Hungary Office - European tax laws & EU compliance
+🇬🇧 London Office - UK tax system & HMRC liaison
+🇦🇪 Dubai Office - UAE tax regulations & VAT
+
+**Mohit's Specialization:**
+• 12+ years certified tax advisor
+• Multi-jurisdictional tax knowledge
+• International business taxation
+
+**Contact Mohit directly: mohit@skvbusiness.com**`;
+            } else if (lowerInput.includes('uk') || lowerInput.includes('london') || lowerInput.includes('europe')) {
+                aiResponse = `🇬🇧 **EUROPEAN & LONDON SETUP**
+
+Contact Expert: **Nikita**
+📧 nikita@skvbusiness.com
+🌐 europe.skvbusiness.com
+
+**UK & European Services:**
+• UK Limited Company Setup: £299-899
+• EU Business Registration: €399-1299
+• London Office Establishment: £599-1999
+• European Banking Solutions: €299-899
+
+**Global European Network:**
+🇭🇺 Hungary Office - EU headquarters & operations
+🇬🇧 London Office - Direct UK presence & support
+🇦🇪 Dubai Office - Europe-Middle East business bridge
+
+**Nikita's Expertise:**
+• UK Companies House certified agent
+• EU business regulations specialist
+• London commercial property expert
+
+**Contact Nikita directly: nikita@skvbusiness.com**`;
+            } else if (lowerInput.includes('dubai') || lowerInput.includes('uae') || lowerInput.includes('middle east')) {
+                aiResponse = `🇦🇪 **DUBAI & MIDDLE EAST OPERATIONS**
+
+**SKV Global Dubai Office**
+📧 info@skvbusiness.com
+🌐 dubai.skvbusiness.com
+
+**UAE Business Services:**
+• UAE Company Formation: AED 2,999-9,999
+• Dubai Business License: AED 1,999-6,999
+• UAE Bank Account Opening: AED 2,499-7,999
+• Dubai Office Setup: AED 3,999-15,999
+
+**Middle East Expertise:**
+• Dubai mainland & free zone companies
+• Abu Dhabi commercial registration
+• Multi-emirate coverage
+• Government liaison services
+
+**Global Connection:**
+🇭🇺 Hungary Office - European business bridge
+🇬🇧 London Office - UK business connection
+🇦🇪 Dubai Office - Local UAE expertise
+
+**Contact Dubai specialists: info@skvbusiness.com**`;
+            } else if (lowerInput.includes('legal') || lowerInput.includes('advisory')) {
+                aiResponse = `⚖️ **LEGAL & ADVISORY SERVICES**
+
+Contact Expert: **Sunil (CEO)**
+📧 sunil@skvbusiness.com
+🌐 legal.skvbusiness.com
+
+**Legal Services:**
+• Legal Consultation: $149-499
+• Contract Review & Drafting: $199-899
+• Business Registration: $299-1299
+• Compliance Auditing: $299-999
+
+**Strategic Advisory:**
+• Business Strategy Development: $299-1299
+• International Expansion: $599-2499
+• Corporate Restructuring: $899-3999
+
+**Global Legal Coverage:**
+🇭🇺 Hungary Office - European business law
+🇬🇧 London Office - UK commercial law
+🇦🇪 Dubai Office - Middle East business law
+
+**Sunil's Expertise:**
+• 15+ years international business law
+• CEO with hands-on operational experience
+• Multi-jurisdictional legal practice
+
+**Contact CEO Sunil: sunil@skvbusiness.com**`;
+            } else if (lowerInput.includes('document') || lowerInput.includes('upload')) {
+                aiResponse = `📄 **GLOBAL DOCUMENT MANAGEMENT**
+
+**Upload From Anywhere:**
+• Airport terminals worldwide
+• Hungary office locations
+• London office premises
+• Dubai office facilities
+• Home/remote locations
+
+**Document Types Supported:**
+• Passport & identity documents
+• Visa applications & forms
+• Business licenses & permits
+• Tax documents & financial statements
+• Legal contracts & agreements
+• Educational certificates
+
+**Global Cloud Features:**
+• Enterprise-grade encryption
+• Multi-location backup (Hungary, London, Dubai)
+• Download access from anywhere
+• Expert team processing access
+• Smart categorization
+
+**Storage Pricing (Pay-as-you-use):**
+• First 2GB: FREE
+• 2-10GB: $5/month
+• 10-50GB: $15/month
+• 50GB+: $30/month
+
+**Use the Document Center tab to upload!**`;
+            } else {
+                aiResponse = `🤖 **SKV GLOBAL AI ASSISTANT**
+
+Welcome to our advanced business platform!
+
+**🌍 GLOBAL EXPERT TEAM:**
+🛂 **Visa & Licenses** → rahul@skvbusiness.com
+💰 **Tax Services** → mohit@skvbusiness.com
+🇬🇧 **European & London Setup** → nikita@skvbusiness.com
+⚖️ **Legal & Advisory** → sunil@skvbusiness.com
+
+**🌍 GLOBAL OFFICE NETWORK:**
+🇭🇺 **Hungary Office** - European operations & EU compliance
+🇬🇧 **London Office** - UK & Commonwealth services
+🇦🇪 **Dubai Office** - Middle East & Asian expansion
+
+**🎤 PLATFORM FEATURES:**
+• Voice messaging (record & playback)
+• Document upload & global cloud storage
+• AI expert routing & recommendations
+• Multi-language support
+• 24/7 availability
+
+**How can I assist you today?**
+Use voice recording, type questions, or upload documents!`;
+            }
+            
+            // Add AI response after delay
+            setTimeout(() => {
+                addMessageToChat('ai', aiResponse);
+            }, 1500);
+            
+            // Clear input
+            input.value = '';
+        }
+
+        // Add Message to Chat
+        function addMessageToChat(type, text, isVoice = false) {
+            const chatArea = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            let voiceIndicator = '';
+            let audioButton = '';
+            
+            if (type === 'user' && isVoice) {
+                voiceIndicator = `
+                    <div class="mb-3">
+                        <span class="bg-blue-800 text-white px-3 py-1 text-sm rounded-full font-bold">🎤 Voice Message</span>
+                    </div>
+                `;
+            }
+            
+            if (type === 'ai') {
+                audioButton = `
+                    <button onclick="speakText('${text.replace(/'/g, "\\'")}'); this.classList.toggle('animate-pulse');" 
+                            class="bg-blue-100 hover:bg-blue-200 p-2 rounded-full transition-colors" title="🔈 Listen to response">
+                        <span class="text-lg">🔈</span>
+                    </button>
+                `;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="max-w-lg px-6 py-4 rounded-2xl shadow-lg ${
+                    type === 'user' 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-white border-2 border-gray-200 text-gray-900'
+                }">
+                    ${type === 'ai' ? `
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="text-2xl">🤖</span>
+                            <span class="font-bold text-lg text-blue-600">SKV AI Assistant</span>
+                            ${audioButton}
+                        </div>
+                    ` : ''}
+                    ${voiceIndicator}
+                    <p class="text-lg whitespace-pre-line leading-relaxed">${text}</p>
+                    <div class="text-sm opacity-70 mt-3">${new Date().toLocaleTimeString()}</div>
+                </div>
+            `;
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // Quick Questions
+        function askQuestion(question) {
+            document.getElementById('message-input').value = question;
+            document.getElementById('message-input').focus();
+        }
+
+        // Contact Expert
+        function contactExpert(email, subject, body) {
+            const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoUrl, '_blank');
+        }
+
+        // Text-to-Speech
+        function speakText(text) {
+            if (window.speechSynthesis) {
+                // Stop any current speech
+                window.speechSynthesis.cancel();
+                
+                // Clean text for speech
+                const cleanText = text.replace(/[🛂💰🇬🇧⚖️🤖📧📄🎤🇭🇺🇦🇪•\*]/g, '')
+                                    .replace(/\*\*/g, '')
+                                    .replace(/\n\n/g, '. ')
+                                    .replace(/\n/g, '. ');
+                
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                utterance.volume = 0.9;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech not supported in this browser');
+            }
+        }
+
+        // File Upload Handler  
+        function handleUpload(input) {
+            const files = input.files;
+            if (files.length === 0) return;
+            
+            // Show upload progress
+            const progressDiv = document.getElementById('upload-progress');
+            progressDiv.classList.remove('hidden');
+            
+            let progress = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            // Simulate upload progress
+            const uploadInterval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(uploadInterval);
+                    
+                    // Hide progress after completion
+                    setTimeout(() => {
+                        progressDiv.classList.add('hidden');
+                        
+                        // Show upload confirmation
+                        const fileNames = Array.from(files).map(file => file.name).join(', ');
+                        const uploadMessage = `📄 **DOCUMENTS UPLOADED SUCCESSFULLY!**
+
+${files.length} file(s) uploaded to SKV Global Cloud:
+${fileNames}
+
+**Global Access Locations:**
+🇭🇺 Hungary Office - European document processing
+🇬🇧 London Office - UK documentation center
+🇦🇪 Dubai Office - Middle East document handling
+
+**Security Features:**
+• Enterprise-grade encryption
+• Automatic backup across all offices
+• Download access from anywhere worldwide
+• Expert team processing access
+
+Your documents are now securely stored in our global cloud system!`;
+                        
+                        addMessageToChat('ai', uploadMessage);
+                        
+                        // Switch to chat tab to show confirmation
+                        showTab('chat');
+                        
+                    }, 1500);
+                }
+            }, 300);
+            
+            // Reset file input
+            input.value = '';
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            console.log('SKV Global Platform Loaded Successfully');
+            
+            // Test voice and speech synthesis support
+            if (!navigator.mediaDevices) {
+                console.log('Voice recording may not be supported');
+            }
+            if (!window.speechSynthesis) {
+                console.log('Text-to-speech may not be supported');
+            }
+            
+            // Add welcome message
+            setTimeout(() => {
+                addMessageToChat('ai', `🤖 **WELCOME TO SKV GLOBAL BUSINESS SERVICE LLC**
+
+I'm your voice-enabled AI assistant!
+
+**🌍 Our Global Team:**
+🛂 **Visa & Licenses** → Rahul (rahul@skvbusiness.com)
+💰 **Tax Services** → Mohit (mohit@skvbusiness.com)
+🇬🇧 **European Setup** → Nikita (nikita@skvbusiness.com)
+⚖️ **Legal & Advisory** → Sunil (sunil@skvbusiness.com)
+
+**🌍 Global Offices:**
+🇭🇺 Hungary • 🇬🇧 London • 🇦🇪 Dubai
+
+**🎤 How to use:**
+• Click microphone to record voice messages
+• Click speaker icons to listen to responses
+• Use Document Center to upload files
+• Ask any business questions!
+
+What can I help you with today?`);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
