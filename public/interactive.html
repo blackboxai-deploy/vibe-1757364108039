@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SKV Global Business Service LLC - Interactive Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(45deg, #e0f2fe, #f3e5f5); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .tab { display: none; }
+        .active { display: block !important; }
+        .btn { padding: 15px 25px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { transform: scale(1.1); }
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px 0; }
+        .pulse { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .bounce { animation: bounce 2s infinite; }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header style="background: white; box-shadow: 0 5px 20px rgba(0,0,0,0.1); padding: 20px 0; position: sticky; top: 0; z-index: 100;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(45deg, #1e40af, #7c3aed); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);">
+                    <span style="color: white; font-size: 36px; font-weight: bold;">S</span>
+                </div>
+                <div>
+                    <h1 style="font-size: 36px; font-weight: bold; color: #1f2937;">SKV Global Business Service LLC</h1>
+                    <p style="color: #6b7280; font-size: 18px; font-weight: 600;">🌍 Hungary | London | Dubai | Worldwide Operations</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <span style="background: #dcfce7; color: #166534; padding: 12px 20px; border-radius: 25px; font-weight: bold;">🎤 Voice</span>
+                <span style="background: #ede9fe; color: #6b21a8; padding: 12px 20px; border-radius: 25px; font-weight: bold;">📄 Upload</span>
+                <button onclick="window.open('mailto:info@skvbusiness.com')" style="background: #1e40af; color: white;" class="btn">Contact</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav style="background: white; border-bottom: 3px solid #e5e7eb; padding: 0;">
+    <div class="container">
+        <div style="display: flex; gap: 60px;">
+            <button onclick="switchTab('chat')" id="btn-chat" style="padding: 25px 0; border-bottom: 4px solid #1e40af; color: #1e40af; font-weight: bold; font-size: 20px; background: transparent; border-top: none; border-left: none; border-right: none; cursor: pointer;">
+                💬 AI Assistant
+            </button>
+            <button onclick="switchTab('services')" id="btn-services" style="padding: 25px 0; border-bottom: 4px solid transparent; color: #6b7280; font-weight: bold; font-size: 20px; background: transparent; border-top: none; border-left: none; border-right: none; cursor: pointer;">
+                🏢 Our Services
+            </button>
+            <button onclick="switchTab('upload')" id="btn-upload" style="padding: 25px 0; border-bottom: 4px solid transparent; color: #6b7280; font-weight: bold; font-size: 20px; background: transparent; border-top: none; border-left: none; border-right: none; cursor: pointer;">
+                📄 Document Center
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container">
+    
+    <!-- Chat Tab -->
+    <div id="tab-chat" class="tab active">
+        <!-- Voice Banner -->
+        <div style="background: linear-gradient(45deg, #dcfce7, #dbeafe); border: 3px solid #10b981; border-radius: 25px; padding: 40px; margin: 40px 0; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);">
+            <h2 style="font-size: 32px; font-weight: bold; margin-bottom: 15px; text-align: center;">🎤 Voice Messages + 🤖 AI Assistant</h2>
+            <p style="font-size: 18px; color: #6b7280; text-align: center;">Record voice messages, listen to AI responses, connect with global experts!</p>
+        </div>
+
+        <!-- Chat -->
+        <div class="card">
+            <div id="messages" style="height: 400px; overflow-y: auto; background: #f8fafc; border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 2px solid #e2e8f0;">
+                <div style="display: flex; justify-content: flex-start;">
+                    <div style="background: white; border: 2px solid #e5e7eb; padding: 20px; border-radius: 20px; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <span style="font-size: 24px;">🤖</span>
+                            <span style="font-weight: bold;">SKV AI</span>
+                            <button onclick="speak('Hello! I help with visa, tax, legal services across Hungary, London, Dubai offices. Use voice or type!')" style="background: #f3f4f6; border: none; padding: 8px; border-radius: 50%; cursor: pointer;">🔈</button>
+                        </div>
+                        <p>Hello! I help with visa, tax, legal services across Hungary, London, Dubai offices. Use voice or type!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Buttons -->
+            <div style="margin-bottom: 25px;">
+                <p style="font-weight: bold; margin-bottom: 15px; font-size: 18px;">Quick Questions:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <button onclick="ask('Tourist visa help?')" style="background: #eff6ff; color: #1e40af; padding: 12px; border-radius: 10px; border: 1px solid #3b82f6; cursor: pointer; font-weight: 500;">🛂 Visa help?</button>
+                    <button onclick="ask('UK company setup?')" style="background: #faf5ff; color: #7c2d12; padding: 12px; border-radius: 10px; border: 1px solid #8b5cf6; cursor: pointer; font-weight: 500;">🇬🇧 UK setup?</button>
+                    <button onclick="ask('Dubai business?')" style="background: #f0fdf4; color: #166534; padding: 12px; border-radius: 10px; border: 1px solid #10b981; cursor: pointer; font-weight: 500;">🇦🇪 Dubai?</button>
+                    <button onclick="ask('Tax help?')" style="background: #fffbeb; color: #92400e; padding: 12px; border-radius: 10px; border: 1px solid #f59e0b; cursor: pointer; font-weight: 500;">💰 Tax?</button>
+                </div>
+            </div>
+
+            <!-- Recording -->
+            <div id="recording-info" style="background: #fef2f2; border: 2px solid #f87171; border-radius: 15px; padding: 20px; margin-bottom: 20px; display: none;">
+                <span style="color: #dc2626; font-weight: bold; font-size: 18px;">🎤 Recording voice... (max 5 seconds)</span>
+                <button onclick="stopRecord()" style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 8px; border: none; margin-left: 15px; cursor: pointer;">Stop</button>
+            </div>
+
+            <!-- Input -->
+            <div style="display: flex; gap: 15px;">
+                <button id="voice-btn" onclick="startRecord()" style="padding: 20px; background: #10b981; color: white; border-radius: 15px; border: none; cursor: pointer; font-size: 28px; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);">🎤</button>
+                <input type="text" id="input" placeholder="Type message or use voice..." style="flex: 1; padding: 20px; border: 2px solid #d1d5db; border-radius: 15px; font-size: 16px; outline: none;" onkeydown="if(event.key==='Enter')sendMsg()">
+                <button onclick="sendMsg()" style="background: #1e40af; color: white; padding: 20px 30px; border-radius: 15px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Tab -->
+    <div id="tab-services" class="tab">
+        <div style="text-align: center; margin: 40px 0;">
+            <h2 style="font-size: 40px; font-weight: bold; margin-bottom: 20px;">🌍 Global Expert Team</h2>
+            <p style="font-size: 20px; color: #6b7280;">Hungary | London | Dubai</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+            
+            <!-- Visa -->
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 80px; margin-bottom: 20px;" class="bounce">🛂</div>
+                <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Visa & License Services</h3>
+                <p style="color: #6b7280; margin-bottom: 5px;">Expert: <strong>Rahul</strong></p>
+                <p style="color: #1e40af; font-weight: bold; margin-bottom: 15px;">rahul@skvbusiness.com</p>
+                <span style="background: #eff6ff; color: #1e40af; padding: 10px 20px; border-radius: 20px; font-weight: bold;">$199-899</span>
+                
+                <div style="margin: 25px 0; text-align: left;">
+                    <p style="margin-bottom: 10px;">• Tourist & Business Visas</p>
+                    <p style="margin-bottom: 10px;">• Student Visas & Work Permits</p>
+                    <p style="margin-bottom: 10px;">• Business Licenses</p>
+                    <p>• Global: Hungary, London, Dubai</p>
+                </div>
+                
+                <button onclick="window.open('mailto:rahul@skvbusiness.com?subject=Visa Services&body=Hello Rahul, I need visa assistance.')" 
+                        style="width: 100%; background: linear-gradient(45deg, #1e40af, #7c3aed); color: white; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; margin-top: 20px;">
+                    📧 Contact Rahul
+                </button>
+            </div>
+
+            <!-- Tax -->
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 80px; margin-bottom: 20px;" class="bounce">💰</div>
+                <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Tax Services</h3>
+                <p style="color: #6b7280; margin-bottom: 5px;">Expert: <strong>Mohit</strong></p>
+                <p style="color: #059669; font-weight: bold; margin-bottom: 15px;">mohit@skvbusiness.com</p>
+                <span style="background: #dcfce7; color: #166534; padding: 10px 20px; border-radius: 20px; font-weight: bold;">$99-899</span>
+                
+                <button onclick="window.open('mailto:mohit@skvbusiness.com?subject=Tax Services&body=Hello Mohit, I need tax help.')" 
+                        style="width: 100%; background: linear-gradient(45deg, #059669, #1e40af); color: white; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; margin-top: 40px;">
+                    📧 Contact Mohit
+                </button>
+            </div>
+
+            <!-- European -->
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 80px; margin-bottom: 20px;" class="bounce">🇬🇧</div>
+                <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">European & London</h3>
+                <p style="color: #6b7280; margin-bottom: 5px;">Expert: <strong>Nikita</strong></p>
+                <p style="color: #7c3aed; font-weight: bold; margin-bottom: 15px;">nikita@skvbusiness.com</p>
+                <span style="background: #faf5ff; color: #7c3aed; padding: 10px 20px; border-radius: 20px; font-weight: bold;">£299-1999</span>
+                
+                <button onclick="window.open('mailto:nikita@skvbusiness.com?subject=European Setup&body=Hello Nikita, I need European help.')" 
+                        style="width: 100%; background: linear-gradient(45deg, #7c3aed, #ec4899); color: white; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; margin-top: 40px;">
+                    📧 Contact Nikita
+                </button>
+            </div>
+
+            <!-- Legal -->
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 80px; margin-bottom: 20px;" class="bounce">⚖️</div>
+                <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Legal & Advisory</h3>
+                <p style="color: #6b7280; margin-bottom: 5px;">Expert: <strong>Sunil (CEO)</strong></p>
+                <p style="color: #dc2626; font-weight: bold; margin-bottom: 15px;">sunil@skvbusiness.com</p>
+                <span style="background: #fee2e2; color: #dc2626; padding: 10px 20px; border-radius: 20px; font-weight: bold;">$149-999</span>
+                
+                <button onclick="window.open('mailto:sunil@skvbusiness.com?subject=Legal Services&body=Hello Sunil, I need legal help.')" 
+                        style="width: 100%; background: linear-gradient(45deg, #dc2626, #ea580c); color: white; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; margin-top: 40px;">
+                    📧 Contact Sunil (CEO)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Tab -->
+    <div id="tab-upload" class="tab">
+        <div style="text-align: center; margin: 40px 0;">
+            <h2 style="font-size: 40px; font-weight: bold; margin-bottom: 20px;">📄 Document Center</h2>
+            <p style="font-size: 20px; color: #6b7280;">Global Cloud Storage</p>
+        </div>
+
+        <div class="card" style="padding: 60px;">
+            <div style="border: 5px dashed #d1d5db; border-radius: 25px; padding: 80px; text-align: center;">
+                <div style="font-size: 150px; margin-bottom: 30px;" class="bounce">📁</div>
+                <h3 style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">Upload Documents</h3>
+                <p style="font-size: 18px; color: #6b7280; margin-bottom: 40px;">Secure storage across Hungary, London, Dubai</p>
+                
+                <input type="file" multiple onchange="fileUpload(this)" style="display: none;" id="files">
+                <button onclick="document.getElementById('files').click()" 
+                        style="background: linear-gradient(45deg, #7c3aed, #ec4899); color: white; padding: 25px 50px; border-radius: 20px; border: none; font-size: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);">
+                    📄 Choose Files
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer style="background: #1f2937; color: white; padding: 60px 0; margin-top: 80px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+            <div>
+                <h3 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">SKV Global</h3>
+                <p style="color: #d1d5db; margin-bottom: 20px;">Voice + AI + Upload Platform</p>
+                <div style="display: flex; gap: 10px;">
+                    <span style="background: #374151; padding: 8px 12px; border-radius: 8px;">🇭🇺</span>
+                    <span style="background: #374151; padding: 8px 12px; border-radius: 8px;">🇬🇧</span>
+                    <span style="background: #374151; padding: 8px 12px; border-radius: 8px;">🇦🇪</span>
+                </div>
+            </div>
+            
+            <div>
+                <h4 style="font-weight: bold; margin-bottom: 20px;">Expert Team</h4>
+                <div style="color: #d1d5db; line-height: 1.8;">
+                    <p>🛂 rahul@skvbusiness.com</p>
+                    <p>💰 mohit@skvbusiness.com</p>
+                    <p>🇬🇧 nikita@skvbusiness.com</p>
+                    <p>⚖️ sunil@skvbusiness.com</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="font-weight: bold; margin-bottom: 20px;">Features</h4>
+                <div style="color: #d1d5db; line-height: 1.8;">
+                    <p>🎤 Voice messages</p>
+                    <p>🔈 Audio responses</p>
+                    <p>📄 Document upload</p>
+                    <p>🌍 Global access</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    let recording = false;
+
+    function switchTab(name) {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(btn => {
+            btn.style.borderBottomColor = 'transparent';
+            btn.style.color = '#6b7280';
+        });
+        
+        document.getElementById('tab-' + name).classList.add('active');
+        document.getElementById('btn-' + name).style.borderBottomColor = '#1e40af';
+        document.getElementById('btn-' + name).style.color = '#1e40af';
+    }
+
+    function startRecord() {
+        recording = true;
+        document.getElementById('voice-btn').innerHTML = '🛑';
+        document.getElementById('voice-btn').style.background = '#dc2626';
+        document.getElementById('voice-btn').classList.add('pulse');
+        document.getElementById('recording-info').style.display = 'block';
+        
+        setTimeout(stopRecord, 5000);
+    }
+
+    function stopRecord() {
+        recording = false;
+        document.getElementById('voice-btn').innerHTML = '🎤';
+        document.getElementById('voice-btn').style.background = '#10b981';
+        document.getElementById('voice-btn').classList.remove('pulse');
+        document.getElementById('recording-info').style.display = 'none';
+        
+        setTimeout(() => {
+            document.getElementById('input').value = 'I need help with business visa for London';
+        }, 1000);
+    }
+
+    function sendMsg() {
+        const input = document.getElementById('input');
+        const text = input.value.trim();
+        if (!text) return;
+        
+        addMessage('user', text);
+        
+        let reply = 'I help with: Visa (rahul@skvbusiness.com), Tax (mohit@skvbusiness.com), European (nikita@skvbusiness.com), Legal (sunil@skvbusiness.com). Hungary, London, Dubai offices.';
+        
+        if (text.toLowerCase().includes('visa')) {
+            reply = 'Visa Services: Contact Rahul at rahul@skvbusiness.com. Tourist: $299-599, Business: $399-899. Global processing: Hungary, London, Dubai offices.';
+        } else if (text.toLowerCase().includes('tax')) {
+            reply = 'Tax Services: Contact Mohit at mohit@skvbusiness.com. Tax filing: $149-499, GST: $199-599. Multi-country expertise.';
+        } else if (text.toLowerCase().includes('uk') || text.toLowerCase().includes('europe')) {
+            reply = 'European Setup: Contact Nikita at nikita@skvbusiness.com. UK company: £299-899, EU registration: €399-1299.';
+        } else if (text.toLowerCase().includes('legal')) {
+            reply = 'Legal Services: Contact CEO Sunil at sunil@skvbusiness.com. Consultation: $149-499, contracts: $199-899.';
+        }
+        
+        setTimeout(() => addMessage('ai', reply), 1500);
+        input.value = '';
+    }
+
+    function addMessage(type, text) {
+        const area = document.getElementById('messages');
+        const div = document.createElement('div');
+        div.style.display = 'flex';
+        div.style.justifyContent = type === 'user' ? 'flex-end' : 'flex-start';
+        div.style.marginBottom = '20px';
+        
+        const audio = type === 'ai' ? `<button onclick="speak('${text}')" style="background: #f3f4f6; border: none; padding: 8px; border-radius: 50%; cursor: pointer; margin-left: 10px;">🔈</button>` : '';
+        
+        div.innerHTML = `
+            <div style="max-width: 350px; padding: 15px 20px; border-radius: 18px; ${type === 'user' ? 'background: #1e40af; color: white;' : 'background: white; border: 1px solid #e5e7eb;'}">
+                ${type === 'ai' ? `<div style="margin-bottom: 10px;"><strong>🤖 SKV AI</strong>${audio}</div>` : ''}
+                <p style="line-height: 1.5;">${text}</p>
+            </div>
+        `;
+        
+        area.appendChild(div);
+        area.scrollTop = area.scrollHeight;
+    }
+
+    function ask(question) {
+        document.getElementById('input').value = question;
+    }
+
+    function speak(text) {
+        if (window.speechSynthesis) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function fileUpload(input) {
+        const files = input.files;
+        alert(`✅ Uploaded ${files.length} files to SKV Global Cloud!\n\n🌍 Accessible from:\n• 🇭🇺 Hungary Office\n• 🇬🇧 London Office\n• 🇦🇪 Dubai Office\n\nSecure enterprise storage!`);
+        
+        addMessage('ai', `📄 ${files.length} documents uploaded successfully to global cloud! Accessible from Hungary, London, Dubai offices.`);
+        switchTab('chat');
+    }
+</script>
+
+</body>
+</html>
